@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Pucherin</title>
+</head>
+<body>
+    <div>
+        <button type="button" id="dados" value="DADOS">DADOS</button>
+        <p id="turno">Turno del jugador 2</p>    
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-10">
+                <div id="tablero" class="col box"></div>
+            </div>
+            <div class="col-2">
+                <div class="col jugadores">
+                    <h2>Jugador 1</h2>
+                    <p id="fichasInicio1"></p>
+                    <p id="fichasGanadas1"></p>
+                </div>
+                <div class="col jugadores">
+                    <h2>Jugador 2</h2>
+                    <p id="fichasInicio2"></p>
+                    <p id="fichasGanadas2"></p>
+                </div>
+                <div class="col jugadores">
+                    <h2>Jugador 3</h2>
+                    <p id="fichasInicio3"></p>
+                    <p id="fichasGanadas3"></p>
+                </div>
+                <div class="col jugadores">
+                    <h2>Jugador 4</h2>
+                    <p id="fichasInicio4"></p>
+                    <p id="fichasGanadas4"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="myCanvas" width="300" height="300"></canvas>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="tablero.js"></script>
+    <!-- <script src="fichas.js"></script> -->
+    <script src="funciones.js"></script>
+</body>
+</html>

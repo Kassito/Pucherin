@@ -1,0 +1,53 @@
+html,body{
+  height:100%;
+  padding:0;
+  margin:0;
+}
+*{
+  box-sizing:border-box;
+}
+.box{
+  position: relative;
+  width:900px;
+  height:650px;
+  background-color:grey;
+}
+
+/* .col-10, .col-2{
+  width: auto;
+} */
+
+.col-2 {
+  flex: 0 0 auto;
+  width: 0%;
+}
+
+.jugadores{
+  height: 150px;
+}
+
+/* .container{
+  
+  width:100%;
+  height:100%;
+  background-color:#ccc;
+  
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  
+} */
+
+.casilla {
+  position: absolute;
+ 
+}
+
+.puchero {
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 42%;
+}
+
+
