@@ -28,8 +28,6 @@ for (var i = 0; i < casillas; i++) {
 // Obtener una referencia a todos los elementos canvas en la página
 var canvases = document.querySelectorAll('.casilla');
 
-
-
 // Dibujar una elipse en cada canvas y posicionarlos en una elipse de 
 for (var i = 0; i < canvases.length; i++) {
   // Obtener el contexto del canvas en 2D
@@ -48,8 +46,6 @@ for (var i = 0; i < canvases.length; i++) {
   if (i>4) pintarCasilla(canvases[i],i+3)
   else pintarCasilla(canvases[i],i+2)
 }
-
-
 
 function pintarCasilla(canvas, fichas, num){
   var ctx = canvas.getContext('2d');
