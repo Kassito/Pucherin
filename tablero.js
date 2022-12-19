@@ -80,18 +80,17 @@ function pintarPuchero(canvas){
   ctx.arc(canvas.width / 2, canvas.height / 2, 60, 0, 2 * Math.PI);
   ctx.fillStyle = 'red';
   ctx.fill();
-  for (var i = 0; i < 4; i++) {
-      // Calcular la posición en el círculo para cada ficha
-      var x = Math.cos(2 * Math.PI * i / 4) * 35 + canvas.width / 2;
-      var y = Math.sin(2 * Math.PI * i / 4) * 35 + canvas.height / 2;
+  // for (var i = 0; i < 4; i++) {
+      // // Calcular la posición en el círculo para cada ficha
+      // var x = Math.cos(2 * Math.PI * i / 4) * 35 + canvas.width / 2;
+      // var y = Math.sin(2 * Math.PI * i / 4) * 35 + canvas.height / 2;
 
-      // Dibujar la ficha en la posición calculada
-      ctx.beginPath();
-      ctx.arc(x, y, 9, 0, 2 * Math.PI);
+      // // Dibujar la ficha en la posición calculada
+      // ctx.beginPath();
+      // ctx.arc(x, y, 9, 0, 2 * Math.PI);
      
-      ctx.fillStyle = 'white'
-      ctx.fill();
-    
+      // ctx.fillStyle = 'white'
+      // ctx.fill();
     
      ctx.fillStyle = 'white';
     // Establecer la fuente para el texto
@@ -100,7 +99,7 @@ function pintarPuchero(canvas){
      x = canvas.width / 2 - ctx.measureText(7).width / 2;
      y = canvas.height / 2 + 10;
      ctx.fillText(7, x, y);
-  }
+  // }
   
 }
 
