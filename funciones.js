@@ -63,7 +63,7 @@ function pintarJugadores(fichasInicio) {
         document.getElementById(ficGanad).innerHTML = 0;
     }
     
-    alert(pActual.jugadores[0]["ganadas"]);
+    // alert(pActual.jugadores[0]["ganadas"]);
     sortear();
 }
 
@@ -76,10 +76,8 @@ function sortear(){
 
 function turnoActual(){
     if(pActual.turnoDe === jugadores){
-        alert("volver al 1")
         pActual.turnoDe = 1;
     } else{
-        alert("sumar 1")
         pActual.turnoDe += 1;
     }
 
@@ -88,22 +86,27 @@ function turnoActual(){
 
 function comprobarFichas(){
     let count = pActual.jugadores.length;
-    // let total = 0;
+    let total = 0;
     for (let i = 0; i < pActual.jugadores.length; i++) {
+        // console.log("Fichas Totales:" + total)
+        total += pActual.jugadores[i]["ganadas"];
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
             let fichas = pActual.jugadores[i]["fichas"];
-            // total += pActual.jugadores[i]["ganadas"];
             if(fichas === 0){
                 count = 0;
             }
         }
     }
+    console.log("Fichas Totales tras el bucle:" + total)
 
     let { ficInit, numero, fichasActuales, ficGanad } = tiradaDados();
 
     if (count === 0) {
-        terminarPartida();
-        sinFichasDisponibles(numero);
+        if(total === fichasTotales){
+            terminarPartida();
+        } else{
+            sinFichasDisponibles(numero);
+        }
     }else{
         conFichasDisponibles(numero, fichasActuales, ficGanad, ficInit);
     }
@@ -112,34 +115,39 @@ function comprobarFichas(){
 function sinFichasDisponibles(numero){
     let ficGanad = "fichasGanadas" + pActual.turnoDe;
 
-    if(numero<7){
+    if(numero < 7){
         pintarCasilla(canvases[numero -2], numero, 0);
-    } else if(numero>7 && numero < 12){
+    } else if(numero > 7 && numero < 12){
         pintarCasilla(canvases[numero -3], numero, 0);
     } else if (numero === 12){
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
-                f = pActual.jugadores[i]["ganadas"];               
+                f = pActual.jugadores[i]["ganadas"];           
             }
         }
         for (let i = 0; i < 10; i++) {
-            console.log(i + " veces")
+            // console.log(i + " veces")
             f += pActual.casillas[i + 2];
-            console.log("f: " + f);
-            pintarCasilla(canvases[i + 2], i + 2, 0);            
+            console.log(pActual.casillas[i + 2] + " f: " + f);
+            if(i < 7){
+                pintarCasilla(canvases[i +2], i+2, 0);
+            } else if(i > 7 && i < 12){
+                pintarCasilla(canvases[i +3], i+3, 0);
+            }
+            // pintarCasilla(canvases[i + 2], i + 2, 0);
         }
     }
 //No coge todas bien si sale 12
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
-            console.log(pActual.casillas[numero])
+            // console.log(pActual.casillas[numero])
             let fichas;
             if(numero === 12){
                 fichas = f;
             }else{
                 fichas = pActual.jugadores[i]["ganadas"] += pActual.casillas[numero] - 1;
             }
-            // console.log(fichas + " gana")
+            console.log(fichas + " gana" + " turno" + pActual.turnoDe)
             document.getElementById(ficGanad).innerHTML = fichas;
         }
     }
@@ -187,9 +195,10 @@ function conFichasDisponibles(numero, fichasActuales, ficGanad, ficInit) {
     } else if (numero > 7 && numero < 12) {
         pintarCasilla(canvases[numero - 3], numero, fichasActuales);
     } else if (numero === 7) {
-        pActual.casillas[7]++;
+        fichasActuales +=1;
+        console.log("del 7: "+fichasActuales);
     } else if (numero === 12) {
-        console.log(pActual.casillas[7]);
+        // console.log(pActual.casillas[7]);
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
                 let fichas = pActual.jugadores[i]["ganadas"] += pActual.casillas[7];
