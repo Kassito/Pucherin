@@ -101,7 +101,6 @@ function comprobarFichas(){
             }
         }
     }
-    console.log("Fichas Totales:" + total)
 
     if(total === fichasTotales){
         terminarPartida();
@@ -140,9 +139,9 @@ function sinFichasDisponibles(numero){
                 f += pActual.casillas[i];
                 pActual.casillas[i] = 0;
                 pintarCasilla(canvases[i -3], i, 0);
-            } else if (i=== 7){
-                pActual.casillas[i] = 0;
+            } else if (i === 7){
                 f += pActual.casillas[i];
+                pActual.casillas[i] = 0;
             }
         }
     }
@@ -165,28 +164,41 @@ function sinFichasDisponibles(numero){
 
 //Comprueba qué jugador tiene más fichas ganadas y lo muestra por pantalla permitiendo resetear el juego
 function terminarPartida(){
-    let fTotal = 0;
+    let contador = 0;
     let ganadorF = 0;
     let ganador = "";
     for (let i = 0; i < pActual.jugadores.length; i++) {
-        fTotal += pActual.jugadores[i]["ganadas"];
         if(pActual.jugadores[i]["ganadas"] > ganadorF){
             ganadorF = pActual.jugadores[i]["ganadas"];
             ganador = pActual.jugadores[i]["Nombre"];
         }
     }
-    console.log("Fichas para ganar "+fTotal)
-    /*if(fTotal === fichasTotales){*/
+
+    for (let i = 0; i < pActual.jugadores.length; i++) {
+        if (pActual.jugadores[i]["ganadas"] === ganadorF){
+            contador++;
+        }
+    }
+
+    let c = 0;
+    let e = 0;
+    if(contador > 1){ //Si dos jugadores o más sacan la misma puntuación es empate
+        alert("Empate");
+        event.preventDefault(); //TODO En desoso, averiguar cómo evitar alert cíclicos
+    } else{
         alert("El ganador es " + ganador);
-        let refresh = document.getElementById('refresh');
-        // botonDados.removeEventListener("click", () =>{ //esto no funciona pero estaría bien que no sacara más números el dado una vez acabada la partida
-        //     comprobarFichas;
-        // } );
-        refresh.addEventListener('click', () => {
-            location.reload();
-        })
-        
-    /*}*/
+        event.preventDefault();
+    }
+
+    let refresh = document.getElementById('refresh');
+    //No sacar números el dado una vez acabada la partida
+    botonDados.removeEventListener("click", 
+        comprobarFichas()
+    );
+    //TODO Ahora esto hay que arreglarlo
+    refresh.addEventListener('click', () => {
+        document.reload();
+    });
 }
 
 //Al pulsar el botón comprueba las fichas y el turno para poder jugar
@@ -197,12 +209,9 @@ botonDados.addEventListener("click", () =>{
 
 //Si quedan fichas disponibles en los jugadores usa el número del dado para colocar la ficha en su sitio y resta una al jugador que le toque
 function conFichasDisponibles(numero) {
-    console.log(numero)
     if(numero === 12){
-        console.log("Sumando al 7");
         pActual.casillas[7]++;
     }else{
-        console.log("Sumando al numero " + numero);
         pActual.casillas[numero]++;
     }
 
@@ -224,7 +233,6 @@ function conFichasDisponibles(numero) {
         pintarCasilla(canvases[numero - 3], numero, fichasActuales);
     } else if (numero === 7) {
         fichasActuales += 1;
-        console.log(pActual.casillas[7] + "Fichas en 7")
     } else if (numero === 12) {
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
