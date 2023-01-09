@@ -1,8 +1,9 @@
 
 const botonDados = document.getElementById("dados");
 
-const fichasTotales = 16;
+const fichasTotales = 60;
 var jugadores = 0;
+var finPartida = false;
 
 // var records = [];
 class Partida {
@@ -65,7 +66,6 @@ function pintarJugadores(fichasInicio) {
         document.getElementById(ficGanad).innerHTML = 0;
     }
     
-    // alert(pActual.jugadores[0]["ganadas"]);
     sortear();
 }
 
@@ -92,8 +92,10 @@ function turnoActual(){
 function comprobarFichas(){
     let count = pActual.jugadores.length;
     let total = 0;
+     let fichas = 0;
     for (let i = 0; i < pActual.jugadores.length; i++) {
         total += pActual.jugadores[i]["ganadas"];
+        fichas += pActual.jugadores[i]["fichas"];
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
             let fichas = pActual.jugadores[i]["fichas"];
             if(fichas === 0){
@@ -102,17 +104,19 @@ function comprobarFichas(){
         }
     }
 
-    if(total === fichasTotales){
+    if((!finPartida) && total === fichasTotales){
+        finPartida = true;
         terminarPartida();
+    }else {
+        let numero = tiradaDados();
+        if (count === 0) {
+            sinFichasDisponibles(numero);
+        } else{
+            conFichasDisponibles(numero);
+        }
     }
     
-    let numero = tiradaDados();
 
-    if (count === 0) {
-        sinFichasDisponibles(numero);
-    } else{
-        conFichasDisponibles(numero);
-    }
 }
 
 //Cuando no quedan fichas para jugar asigna las que tenga cada casilla al jugador que ha sacado ese número
@@ -150,12 +154,17 @@ function sinFichasDisponibles(numero){
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
             let fichas;
             if(numero === 12){
+                console.log(numero + "numero");
                 fichas = f;
                 pActual.jugadores[i]["ganadas"] = fichas;
-            } else{
+            } else if (numero !== 7){
+                console.log(numero + "numero");
                 fichas = pActual.jugadores[i]["ganadas"] += pActual.casillas[numero];
                 pActual.jugadores[i]["ganadas"] = fichas;
                 pActual.casillas[numero] = 0;
+            } else {
+                console.log(numero + "numero");
+                fichas = pActual.jugadores[i]["ganadas"];
             }
             document.getElementById(ficGanad).innerHTML = fichas;
         }
@@ -164,6 +173,7 @@ function sinFichasDisponibles(numero){
 
 //Comprueba qué jugador tiene más fichas ganadas y lo muestra por pantalla permitiendo resetear el juego
 function terminarPartida(){
+    console.log("fin partida");
     let contador = 0;
     let ganadorF = 0;
     let ganador = "";
@@ -180,24 +190,22 @@ function terminarPartida(){
         }
     }
 
-    let c = 0;
-    let e = 0;
-    if(contador > 1){ //Si dos jugadores o más sacan la misma puntuación es empate
+    if(contador > 1 ){ //Si dos jugadores o más sacan la misma puntuación es empate
         alert("Empate");
-        event.preventDefault(); //TODO En desoso, averiguar cómo evitar alert cíclicos
     } else{
         alert("El ganador es " + ganador);
-        event.preventDefault();
     }
 
-    let refresh = document.getElementById('refresh');
+    botonDados.style.visibility = "hidden";
+
+    const refresh = document.getElementById('refresh');
     //No sacar números el dado una vez acabada la partida
-    botonDados.removeEventListener("click", 
-        comprobarFichas()
-    );
+    // botonDados.removeEventListener("click", 
+    //     comprobarFichas()
+    // );
     //TODO Ahora esto hay que arreglarlo
     refresh.addEventListener('click', () => {
-        document.reload();
+        location.reload();
     });
 }
 
@@ -209,21 +217,21 @@ botonDados.addEventListener("click", () =>{
 
 //Si quedan fichas disponibles en los jugadores usa el número del dado para colocar la ficha en su sitio y resta una al jugador que le toque
 function conFichasDisponibles(numero) {
-    if(numero === 12){
-        pActual.casillas[7]++;
-    }else{
+    console.log("Entrando a con fichas");
+
+    if(numero !== 12){
         pActual.casillas[numero]++;
     }
-
     let fichasActuales = pActual.casillas[numero];
     let ficInit = "fichasInicio" + pActual.turnoDe;
     let ficGanad = "fichasGanadas" + pActual.turnoDe;
-
-
+    console.log(numero + "numero");
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
-            let fichas = pActual.jugadores[i]["fichas"] -= 1;
-            document.getElementById(ficInit).innerHTML = fichas;
+            if(numero !== 12){
+                let fichas = pActual.jugadores[i]["fichas"] -= 1;
+                document.getElementById(ficInit).innerHTML = fichas;
+            }
         }
     }
 
@@ -242,7 +250,6 @@ function conFichasDisponibles(numero) {
         }
         pActual.casillas[7] = 0;
     }
-
     comprobarLleno(numero, fichasActuales);
 }
 
