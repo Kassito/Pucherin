@@ -194,13 +194,14 @@ function terminarPartida(){
             ganador = pActual.jugadores[i]["Nombre"];
         }
     }
+    // ganador = prompt("Cuál es tu nombre?");
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if (pActual.jugadores[i]["ganadas"] === ganadorF){
             contador++;
         }
     }
-console.log("Contador" + contador)
+ 
     if(contador > 1 ){ //Si dos jugadores o más sacan la misma puntuación es empate
         console.log("Empate");
         document.getElementById("ganador").innerHTML = "Empate";
@@ -208,8 +209,10 @@ console.log("Contador" + contador)
         console.log("El ganador es " + ganador);
         document.getElementById("ganador").innerHTML = "El ganador es " + ganador;
         records.push(ganador + " con " + ganadorF + " fichas"); 
-        resultadoRecords = cookilandRet();
+        cookiland(records);
+
     }
+    resultadoRecords = cookilandRet();
 
     botonDados.style.visibility = "hidden";
     refresh.style.visibility = "visible";
