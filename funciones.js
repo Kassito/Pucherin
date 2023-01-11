@@ -1,8 +1,9 @@
 
 const botonDados = document.getElementById("dados");
 const refresh = document.getElementById('refresh');
+const images = ["imagenes/dado1.jpg", "imagenes/dado2.jpg", "imagenes/dado3.jpg", "imagenes/dado4.jpg", "imagenes/dado5.jpg", "imagenes/dado6.jpg"];
 
-const fichasTotales = 60;
+const fichasTotales = 12;
 var jugadores = 0;
 var finPartida = false;
 
@@ -185,6 +186,8 @@ function terminarPartida(){
     let contador = 0;
     let ganadorF = 0;
     let ganador = "";
+    let resultadoRecords = [];
+
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if(pActual.jugadores[i]["ganadas"] > ganadorF){
             ganadorF = pActual.jugadores[i]["ganadas"];
@@ -197,23 +200,34 @@ function terminarPartida(){
             contador++;
         }
     }
-
+console.log("Contador" + contador)
     if(contador > 1 ){ //Si dos jugadores o más sacan la misma puntuación es empate
         console.log("Empate");
         document.getElementById("ganador").innerHTML = "Empate";
     } else{
         console.log("El ganador es " + ganador);
         document.getElementById("ganador").innerHTML = "El ganador es " + ganador;
-        records.push(ganador, ganadorF); //TODO comprobar records
+        records.push(ganador + " con " + ganadorF + " fichas"); 
+        resultadoRecords = cookilandRet();
     }
 
     botonDados.style.visibility = "hidden";
     refresh.style.visibility = "visible";
-
     
+    mostrarRecords(resultadoRecords);
+
     refresh.addEventListener('click', () => {
         location.reload();
     });
+}
+
+function mostrarRecords(resultadoRecords){
+    document.getElementById("tituloRecords").innerHTML = "RECORDS:"
+    console.log("Records:");
+    for (let i = 0; i < 3; i++) {
+        document.getElementById("mostrarRecord").innerHTML += resultadoRecords[i] + "<br>";
+        console.log(resultadoRecords[i]);
+    }
 }
 
 //Al pulsar el botón comprueba las fichas y el turno para poder jugar
@@ -262,14 +276,30 @@ function conFichasDisponibles(numero) {
 
 //Sale un número aleatrio entre 2 y 12 para jugar
 function tiradaDados() {
-    // Partida.tirada = parseInt(prompt("introduce numero dados"));
-    let numero = Math.floor(Math.random()*(13-2) + 2);
-    alert(numero);
-    console.log("Sale el " + numero);
-    // let numero = 4;
-    // alert(numero);
+    let dieOneValue = Math.floor(Math.random()*6);
+    let dieTwoValue = Math.floor(Math.random()*6);
+    let numero = dieOneValue + dieTwoValue +2;
+    girarDado(dieOneValue, dieTwoValue);
+
+    console.log("Sale el " + (numero));
 
     return numero;
+}
+
+function girarDado(dieOneValue, dieTwoValue){
+    let dice = document.querySelectorAll("img")
+    dice.forEach(function(die){
+        die.classList.add("shake");
+    });
+    setTimeout(function() {
+        dice.forEach(function(die){
+            die.classList.remove("shake");
+        });
+
+        document.getElementById("dadoA").setAttribute("src" , images[dieOneValue]);
+        document.getElementById("dadoB").setAttribute("src" , images[dieTwoValue]);
+
+    }, 1000);
 }
 
 //Comprueba el número que ha salido y pinta la casilla de nuevo vacía sumando su número al jugador que le toca
@@ -295,3 +325,5 @@ function comprobarLleno(numero, fichasActuales){
         pActual.casillas[numero] = 0;
     }
 }
+
+

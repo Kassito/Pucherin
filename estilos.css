@@ -66,3 +66,24 @@ html,body{
   margin-top: 2em;
 }
 
+.shake{
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%{
+      transform: rotate(20deg);
+  }
+  50%{
+      transform: rotate(-20deg);
+  }
+  100%{
+      transform: rotate(20deg);
+  }
+}
+
+.dados{
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+}

@@ -19,6 +19,8 @@
             <div class="col-12 col-xl-4">
                 <div class="row">
                     <div class="col-12">
+                        <img src="imagenes/dado3.jpg" id="dadoA">
+                        <img src="imagenes/dado2.jpg" id="dadoB">
                         <button type="button" id="dados" value="DADOS">DADOS</button>
                         <p id="turno"></p>    
                     </div>
@@ -46,7 +48,10 @@
                     </div>
                     <div class="col-12">
                         <h1 id="ganador"></h1>
+                        <h3 id="tituloRecords"></h3>
+                        <p id="mostrarRecord"></p>
                         <button id="refresh">Recargar</button>
+                        <button name="cookiDel" id="cookiDel">Borrar Records</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +63,7 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="tablero.js"></script>
     <!-- <script src="fichas.js"></script> -->
+    <script src="cookies.js"></script>
     <script src="funciones.js"></script>
 </body>
 </html>
