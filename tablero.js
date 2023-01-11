@@ -40,8 +40,13 @@ for (var i = 0; i < canvases.length; i++) {
   //ctx.stroke();
 
   // Posicionar el canvas en la elipse 
-  canvases[i].style.left = Math.cos(2 * Math.PI * i / casillas) * 400 + 400 - 25 + 'px';
-  canvases[i].style.top = Math.sin(2 * Math.PI * i / casillas) * 250 + 300  - 25  + 'px';
+  // canvases[i].style.left = Math.cos(2 * Math.PI * i / casillas) * 400 + 400 - 25 + 'px';
+  // canvases[i].style.top = Math.sin(2 * Math.PI * i / casillas) * 250 + 300  - 25  + 'px';
+  const tablero = document.getElementById("tablero");
+  let k = 0.0009;
+
+  canvases[i].style.left = (Math.cos(2 * Math.PI * i / casillas) *  (tablero.clientWidth/2.5) + (tablero.clientWidth/2.5)) + 'px';
+  canvases[i].style.top = (Math.sin(2 * Math.PI * i / casillas) * (tablero.clientHeight/2.5) + (tablero.clientHeight/2.5)) + 'px';
   
   if (i>4) pintarCasilla(canvases[i],i+3)
   else pintarCasilla(canvases[i],i+2)

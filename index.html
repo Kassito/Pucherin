@@ -9,18 +9,19 @@
     <title>Pucherin</title>
 </head>
 <body>
-    <div>
-        <button type="button" id="dados" value="DADOS">DADOS</button>
-        <p id="turno"></p>    
-    </div>
+    
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12 col-xl-8">
                 <div id="tablero" class="col box"></div>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-xl-4">
                 <div class="row">
+                    <div class="col-12">
+                        <button type="button" id="dados" value="DADOS">DADOS</button>
+                        <p id="turno"></p>    
+                    </div>
                     <div class="col jugadores">
                         <h2>Jugador 1</h2>
                         <p id="fichasInicio1"></p>
@@ -43,9 +44,12 @@
                         <p id="fichasInicio4"></p>
                         <p id="fichasGanadas4"></p>
                     </div>
+                    <div class="col-12">
+                        <h1 id="ganador"></h1>
+                        <button id="refresh">Recargar</button>
+                    </div>
                 </div>
             </div>
-            <button id="refresh">Recargar</button>
         </div>
     </div>
 

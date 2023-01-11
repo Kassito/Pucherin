@@ -10,7 +10,7 @@ html,body{
   position: relative;
   width:900px;
   height:650px;
-  background-color:grey;
+  background-color:rgb(99, 135, 189);
 }
 
 /* .col-10, .col-2{
@@ -40,7 +40,6 @@ html,body{
 
 .casilla {
   position: absolute;
- 
 }
 
 .puchero {
@@ -54,4 +53,16 @@ html,body{
   visibility: visible;
 }
 
+#ganador{
+  color: rgb(22, 139, 51);
+}
+
+#turno{
+  font-size: 2em;
+
+}
+
+#refresh{
+  margin-top: 2em;
+}
 
