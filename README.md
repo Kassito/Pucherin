@@ -1,6 +1,6 @@
 # Juego del pucherin
 
-Pucherín es un juego de mesa, ahora implementado en digital gracias a los desarrolladores Cristina Pascua y Pablo Casanova. Se trata de un juego de 2 a 4 jugadores y gana el que más fichas gana. 
+Pucherín es un juego de mesa, ahora implementado en digital gracias a los desarrolladores Cristina Pascua y Pablo Casanova. Se trata de un juego de 2 a 5 jugadores y gana el que más fichas gana. 
 
 ![This is an image](/imagenes/puchero.jpg)
 
