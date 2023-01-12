@@ -1,5 +1,3 @@
-
-const botonDados = document.getElementById("dados");
 const refresh = document.getElementById('refresh');
 const images = ["imagenes/dado1.jpg", "imagenes/dado2.jpg", "imagenes/dado3.jpg", "imagenes/dado4.jpg", "imagenes/dado5.jpg", "imagenes/dado6.jpg"];
 
@@ -33,6 +31,7 @@ var pActual;
 
 //Al iniciar la partida reparte las fichas en función de los jugadores
 function repartir(){
+    //Se pregunta el número de jugadores, se crea una nueva partida y se asignan las fichas
     jugadores = parseInt(prompt("¿Cuántos jugadores sois? de 2 a 5"));
 
     pActual = new Partida();
@@ -48,7 +47,7 @@ function repartir(){
     pintarJugadores(fichasTotales/jugadores);
 }
 
-//Al iniciar la partida pinta el número de jugadores seleccionado
+//Al iniciar la partida pinta el número de jugadores seleccionado con sus fichas correspondientes
 function pintarJugadores(fichasInicio) {
     if(jugadores === 3){
         document.getElementById("jug3").innerHTML = "Jugador 3";
@@ -75,15 +74,15 @@ function pintarJugadores(fichasInicio) {
     sortear();
 }
 
-//Al iniciar la partida sortea el turno que toca
+//Al iniciar la partida sortea el turno que toca para saber qué jugador empieza
 function sortear(){
     let num = Math.floor(Math.random()*((jugadores + 1)-1) + 1);
     console.log("Turno del jugador " + num);
     document.getElementById("turno").innerHTML = "Turno del jugador " + num;
-    pActual.turnoDe =  num;
+    pActual.turnoDe = num;
 }
 
-//Asigna el turno que toca
+//Asigna el turno que toca tras cada tirada de dados
 function turnoActual(){
     if(pActual.turnoDe === jugadores){
         pActual.turnoDe = 1;
@@ -95,7 +94,7 @@ function turnoActual(){
     document.getElementById("turno").innerHTML = "Turno del jugador " + pActual.turnoDe;
 }
 
-//Comprueba que queden fichas y elige la función correcta en cada caso
+//Comprueba que queden fichas por jugar y elige la función correcta en cada caso
 function comprobarFichas(){
     let count = pActual.jugadores.length;
     let total = 0;
@@ -111,19 +110,19 @@ function comprobarFichas(){
         }
     }
 
-    if((!finPartida) && total === fichasTotales){
+    if((!finPartida) && total === fichasTotales){ //Si ya no hay fichas y la partida se ha terminado mira quién ha ganado
         finPartida = true;
         terminarPartida();
     }else {
         let numero = tiradaDados();
 
-        if (count === 0) {
+        if (count === 0) { //Si ya no quedan fichas por jugar, pero si en el tablero comienza a asignar las fichas en cada jugada
             sinFichasDisponibles(numero);
-        } else{
+        } else{ //Si quedan fichas por jugar, sigue jugando normal
             conFichasDisponibles(numero);
         }
 
-        for (let i = 2; i < 12; i++) {
+        for (let i = 2; i < 12; i++) { //Para modo texto pinta las fichas en cada turno
             console.log("Casilla " + i + " tiene " + pActual.casillas[i]);
         }
     }
@@ -134,7 +133,7 @@ function comprobarFichas(){
 //Cuando no quedan fichas para jugar asigna las que tenga cada casilla al jugador que ha sacado ese número
 function sinFichasDisponibles(numero){
     let ficGanad = "fichasGanadas" + pActual.turnoDe;
-
+    //Pinta la casilla a 0 en cada número, excepto en 12 que las suma todas y las pinta todas a 0
     if(numero < 7){
         pintarCasilla(canvases[numero -2], numero, 0);
     } else if(numero > 7 && numero < 12){
@@ -161,7 +160,8 @@ function sinFichasDisponibles(numero){
             }
         }
     }
-    
+
+    //Suma el número de fichas ganadas en cada tirada al jugador actual
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
             let fichas;
@@ -196,7 +196,7 @@ function terminarPartida(){
             ganador = pActual.jugadores[i]["Nombre"];
         }
     }
-    ganador = prompt("Cuál es tu nombre?");
+    ganador = prompt("Cuál es tu nombre?"); //Pregunta el nombre del ganador para ponerlo por pantalla
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if (pActual.jugadores[i]["ganadas"] === ganadorF){
@@ -207,25 +207,27 @@ function terminarPartida(){
     if(contador > 1 ){ //Si dos jugadores o más sacan la misma puntuación es empate
         console.log("Empate");
         document.getElementById("ganador").innerHTML = "Empate";
-    } else{
+    } else{ //Si no muestra el ganador y lo añade al ranking
         console.log("El ganador es " + ganador);
         document.getElementById("ganador").innerHTML = "El ganador es " + ganador;
         records.push(ganador + " con " + ganadorF + " fichas"); 
         cookiland(records);
 
     }
-    resultadoRecords = cookilandRet();
+    resultadoRecords = cookilandRet(); //Ordena el ranking
 
+    //Muestra y oculta los botones
     botonDados.style.visibility = "hidden";
     refresh.style.visibility = "visible";
     
-    mostrarRecords(resultadoRecords);
+    mostrarRecords(resultadoRecords); //Muestra los 3 mejores
 
-    refresh.addEventListener('click', () => {
+    refresh.addEventListener('click', () => { //Permite resetear la partida al finalizarla
         location.reload();
     });
 }
 
+//Añade el título de records a la pantalla y pinta los 3 primeros
 function mostrarRecords(resultadoRecords){
     document.getElementById("tituloRecords").innerHTML = "RECORDS:"
     console.log("Records:");
@@ -235,22 +237,20 @@ function mostrarRecords(resultadoRecords){
     }
 }
 
-//Al pulsar el botón comprueba las fichas y el turno para poder jugar
-botonDados.addEventListener("click", () =>{
-    comprobarFichas();
-    turnoActual();
-} );
-
 //Si quedan fichas disponibles en los jugadores usa el número del dado para colocar la ficha en su sitio y resta una al jugador que le toque
 function conFichasDisponibles(numero) {
+    let ficInit = "fichasInicio" + pActual.turnoDe;
+    let ficGanad = "fichasGanadas" + pActual.turnoDe;
+    let fichasActuales = 0;
+    
+    //Se asigna el número de fichas a su casilla
     if(numero !== 12){
         pActual.casillas[numero]++;
     }
-    let fichasActuales = pActual.casillas[numero];
-    let ficInit = "fichasInicio" + pActual.turnoDe;
-    let ficGanad = "fichasGanadas" + pActual.turnoDe;
 
-    for (let i = 0; i < pActual.jugadores.length; i++) {
+    fichasActuales = pActual.casillas[numero];
+
+    for (let i = 0; i < pActual.jugadores.length; i++) { //Se actualizan los datos de las fichas del jugador actual
         if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
             if(numero !== 12){
                 let fichas = pActual.jugadores[i]["fichas"] -= 1;
@@ -260,6 +260,7 @@ function conFichasDisponibles(numero) {
         }
     }
 
+    //Se pinta el nuevo estado de la casilla que ha salido
     if (numero < 7) {
         pintarCasilla(canvases[numero - 2], numero, fichasActuales);
     } else if (numero > 7 && numero < 12) {
@@ -279,7 +280,7 @@ function conFichasDisponibles(numero) {
     comprobarLleno(numero, fichasActuales);
 }
 
-//Sale un número aleatrio entre 2 y 12 para jugar
+//Sale un número aleatrio entre 2 y 12 para jugar y se pinta con los dos dados
 function tiradaDados() {
     let dieOneValue = Math.floor(Math.random()*6);
     let dieTwoValue = Math.floor(Math.random()*6);
@@ -291,6 +292,7 @@ function tiradaDados() {
     return numero;
 }
 
+//Se añade y quita el movimiento de los dados a cada tirada
 function girarDado(dieOneValue, dieTwoValue){
     let dice = document.querySelectorAll("img")
     dice.forEach(function(die){
