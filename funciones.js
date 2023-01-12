@@ -8,6 +8,7 @@ var jugadores = 0;
 var finPartida = false;
 
 var records = [];
+
 function Partida() {
     constructor: {
         this.turnoDe = 1;
@@ -194,7 +195,7 @@ function terminarPartida(){
             ganador = pActual.jugadores[i]["Nombre"];
         }
     }
-    // ganador = prompt("Cuál es tu nombre?");
+    ganador = prompt("Cuál es tu nombre?");
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if (pActual.jugadores[i]["ganadas"] === ganadorF){
