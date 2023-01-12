@@ -65,11 +65,16 @@ function pintarCasilla(canvas, fichas, num){
       // Dibujar la ficha en la posición calculada
       ctx.beginPath();
       ctx.arc(x, y, 9, 0, 2 * Math.PI);
-      if (i < num ) ctx.fillStyle = 'red'
-         else ctx.fillStyle = 'white'
+      if (i < num )
+        ctx.fillStyle = 'red';
+      else
+        ctx.fillStyle = 'white';
+        
       ctx.fill();
+      ctx.stroke();
     
      ctx.fillStyle = 'white';
+     
     // Establecer la fuente para el texto
      ctx.font = '24px sans-serif';
      // Dibujar el número en el canvas usando el método fillText()

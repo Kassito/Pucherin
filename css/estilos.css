@@ -13,10 +13,6 @@ html,body{
   background-color:rgb(99, 135, 189);
 }
 
-/* .col-10, .col-2{
-  width: auto;
-} */
-
 .col-2 {
   flex: 0 0 auto;
   width: 0%;
@@ -26,31 +22,19 @@ html,body{
   height: 150px;
 }
 
-/* .container{
-  
-  width:100%;
-  height:100%;
-  background-color:#ccc;
-  
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  
-} */
-
 .casilla {
   position: absolute;
+  border: solid black;
+  border-radius: 50%;
 }
 
 .puchero {
   margin: 0;
   position: absolute;
+  border: solid black;
+  border-radius: 50%;
   top: 45%;
   left: 42%;
-}
-
-#dados{
-  visibility: visible;
 }
 
 #ganador{
