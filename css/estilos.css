@@ -45,20 +45,20 @@
       #ganador{
         color: rgb(22, 139, 51);
       }
-      
+
       #turno{
         font-size: 2em;
       
       }
-      
+
       #refresh{
-        margin-top: 2em;
+        margin-top: 2%;
       }
-      
+
       .shake{
         animation: shake 0.5s infinite;
       }
-      
+
       @keyframes shake {
         0%{
             transform: rotate(20deg);
@@ -70,10 +70,9 @@
             transform: rotate(20deg);
         }
       }
-      
+
       .dados{
         width: 90%;
         display: flex;
         justify-content: space-around;
       }
-      

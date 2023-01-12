@@ -2,7 +2,7 @@ const refresh = document.getElementById('refresh');
 const images = ["imagenes/dado1.jpg", "imagenes/dado2.jpg", "imagenes/dado3.jpg", "imagenes/dado4.jpg", "imagenes/dado5.jpg", "imagenes/dado6.jpg"];
 
 const fichasTotales = 12;
-var jugadores = 0;
+// var jugadores = 0;
 var finPartida = false;
 
 var records = [];
@@ -30,9 +30,9 @@ function Partida() {
 var pActual;
 
 //Al iniciar la partida reparte las fichas en función de los jugadores
-function repartir(){
+function repartir(jugadores){
     //Se pregunta el número de jugadores, se crea una nueva partida y se asignan las fichas
-    jugadores = parseInt(prompt("¿Cuántos jugadores sois? de 2 a 5"));
+    // jugadores = parseInt(prompt("¿Cuántos jugadores sois? de 2 a 5"));
 
     pActual = new Partida();
 
@@ -44,11 +44,13 @@ function repartir(){
         console.log(pActual.jugadores[i]["Nombre"] + " tiene " + pActual.jugadores[i]["fichas"] + " y ganadas 0");
     }
 
-    pintarJugadores(fichasTotales/jugadores);
+    pintarJugadores(fichasTotales/jugadores, jugadores);
+    
+    return fichasTotales/jugadores;
 }
 
 //Al iniciar la partida pinta el número de jugadores seleccionado con sus fichas correspondientes
-function pintarJugadores(fichasInicio) {
+function pintarJugadores(fichasInicio, jugadores) {
     if(jugadores === 3){
         document.getElementById("jug3").innerHTML = "Jugador 3";
     }else if(jugadores === 4){
@@ -71,15 +73,19 @@ function pintarJugadores(fichasInicio) {
         document.getElementById(ficGanad).innerHTML = 0;
     }
     
-    sortear();
+    sortear(jugadores);
 }
 
 //Al iniciar la partida sortea el turno que toca para saber qué jugador empieza
-function sortear(){
+function sortear(jugadores){
     let num = Math.floor(Math.random()*((jugadores + 1)-1) + 1);
+    
     console.log("Turno del jugador " + num);
     document.getElementById("turno").innerHTML = "Turno del jugador " + num;
+    
     pActual.turnoDe = num;
+
+    return num;
 }
 
 //Asigna el turno que toca tras cada tirada de dados
@@ -126,8 +132,6 @@ function comprobarFichas(){
             console.log("Casilla " + i + " tiene " + pActual.casillas[i]);
         }
     }
-    
-
 }
 
 //Cuando no quedan fichas para jugar asigna las que tenga cada casilla al jugador que ha sacado ese número
@@ -196,7 +200,6 @@ function terminarPartida(){
             ganador = pActual.jugadores[i]["Nombre"];
         }
     }
-    ganador = prompt("Cuál es tu nombre?"); //Pregunta el nombre del ganador para ponerlo por pantalla
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if (pActual.jugadores[i]["ganadas"] === ganadorF){
@@ -208,6 +211,7 @@ function terminarPartida(){
         console.log("Empate");
         document.getElementById("ganador").innerHTML = "Empate";
     } else{ //Si no muestra el ganador y lo añade al ranking
+        ganador = prompt("Cuál es tu nombre?"); //Pregunta el nombre del ganador para ponerlo por pantalla
         console.log("El ganador es " + ganador);
         document.getElementById("ganador").innerHTML = "El ganador es " + ganador;
         records.push(ganador + " con " + ganadorF + " fichas"); 
@@ -313,6 +317,7 @@ function girarDado(dieOneValue, dieTwoValue){
 function comprobarLleno(numero, fichasActuales){
     let ficGanad = "fichasGanadas" + pActual.turnoDe;
     let f = 0;
+    console.log(fichasActuales +" y numero "+ numero)
 
     if(fichasActuales === numero){
         if(numero < 7){

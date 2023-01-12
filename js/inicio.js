@@ -1,9 +1,10 @@
 const botonDados = document.getElementById("dados");
-
+var jugadores = 0;
 //El juego comienza al cargar la página completa
 window.onload = () => {
     refresh.style.visibility = "hidden";
-    repartir();
+    jugadores = parseInt(prompt("¿Cuántos jugadores sois? de 2 a 5"));
+    repartir(jugadores);
 }
 
 

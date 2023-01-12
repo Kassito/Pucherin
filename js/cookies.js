@@ -10,17 +10,7 @@ function cookiland(records) {
 }
 
 function cookilandRet() {
-  let recordsCookies = document.cookie;
-  let cadenaRecords = "";
-  let mostrarRecords = [];
-
-  cadenaRecords = recordsCookies.replaceAll(/fichas/g, "fichas,");
-
-  let arrayJugadores = cadenaRecords.replace(/,$/, "").split(",");
-
-  arrayJugadores.sort((p1, p2) => p2.split(" ")[2] - p1.split(" ")[2])
-
-  mostrarRecords = arrayJugadores.slice(0, 3);
+  let mostrarRecords = document.cookie.replaceAll(/fichas/g, "fichas,").replace(/,$/, "").split(",").sort((p1, p2) => p2.split(" ")[2] - p1.split(" ")[2]).slice(0, 3);
 
   return mostrarRecords;
 }

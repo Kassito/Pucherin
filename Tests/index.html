@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests con mocha</title>
+    <link rel="stylesheet" href="https://unpkg.com/mocha@10.0.0/mocha.css">
+</head>
+<body>
+    <div id="mocha"></div>
+
+  <script src="https://unpkg.com/chai@4.3.6/chai.js"></script>
+  <script src="https://unpkg.com/mocha@10.0.0/mocha.js"></script>
+
+  <script class="mocha-init">
+    mocha.setup('bdd');
+    mocha.checkLeaks();
+  </script>
+
+  <script src="../js/cookies.js"></script>
+  <script src="../js/inicio.js"></script>
+  <script src="../js/juego.js"></script>
+  
+  <script src="TestNumero.js"></script>
+  <!-- <script src="TestJugadores.js"></script> --><!-- Esta no funciona porque no acepta parámetros y varia cada vez, pero investigamos cómo hacerlo y si se puede -->
+  <!-- <script src="TestRecords.js"></script> --><!-- Esta no funciona porque no acepta parámetros y varia cada vez, pero investigamos cómo hacerlo y si se puede -->
+  <script class="mocha-exec"> 
+    mocha.run();
+  </script>
+</body>
+</html>
