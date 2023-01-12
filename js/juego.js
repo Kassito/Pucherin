@@ -31,16 +31,13 @@ function Partida() {
 
 var pActual;
 
-window.onload = () => {
-    refresh.style.visibility = "hidden";
-    repartir();
-}
-
 //Al iniciar la partida reparte las fichas en función de los jugadores
 function repartir(){
-    jugadores = parseInt(prompt("¿Cuántos jugadores sois? de 2 a 4"));
+    jugadores = parseInt(prompt("¿Cuántos jugadores sois? de 2 a 5"));
 
     pActual = new Partida();
+
+    console.log(pActual);
 
     for (let i = 0; i < jugadores; i++) {
         let jugador = {Nombre: "Jugador" + (i+1), fichas: fichasTotales/jugadores, ganadas: 0};
@@ -58,6 +55,10 @@ function pintarJugadores(fichasInicio) {
     }else if(jugadores === 4){
         document.getElementById("jug3").innerHTML = "Jugador 3";
         document.getElementById("jug4").innerHTML = "Jugador 4";
+    }else if(jugadores === 5){
+        document.getElementById("jug3").innerHTML = "Jugador 3";
+        document.getElementById("jug4").innerHTML = "Jugador 4";
+        document.getElementById("jug5").innerHTML = "Jugador 5";
     }
 
     let ficInit = "";
@@ -80,7 +81,6 @@ function sortear(){
     console.log("Turno del jugador " + num);
     document.getElementById("turno").innerHTML = "Turno del jugador " + num;
     pActual.turnoDe =  num;
-    console.log(pActual);
 }
 
 //Asigna el turno que toca
@@ -115,15 +115,16 @@ function comprobarFichas(){
         finPartida = true;
         terminarPartida();
     }else {
-        for (let i = 2; i < 12; i++) {
-            console.log("Casilla " + i + " tiene " + pActual.casillas[i]);
-        }
-
         let numero = tiradaDados();
+
         if (count === 0) {
             sinFichasDisponibles(numero);
         } else{
             conFichasDisponibles(numero);
+        }
+
+        for (let i = 2; i < 12; i++) {
+            console.log("Casilla " + i + " tiene " + pActual.casillas[i]);
         }
     }
     
