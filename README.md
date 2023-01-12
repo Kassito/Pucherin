@@ -23,4 +23,4 @@
 - Si los jugadores no tienen más fichas que poner y sale un 12, se lelva todas las fichas del tablero, incluido el puchero y finaliza el juego.
 - Gana el jugador con más fichas gangadas.
 
-Jugar ahora [GitHub Pages](vinculo)
+[Jugar ahora](vinculo)
