@@ -1,4 +1,4 @@
-const fichasTotales = 12;
+const fichasTotales = 60;
 var jugadores = 0;
 var finPartida = true;
 
@@ -118,7 +118,6 @@ function turnoActual(){
 function comprobarFichas(){
     let count = pActual.jugadores.length;
     let total = 0;
-    let fichas = 0;
     console.log("Turno del jugador " + pActual.turnoDe);
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
@@ -155,7 +154,7 @@ function comprobarFichas(){
 //Cuando no quedan fichas para jugar asigna las que tenga cada casilla al jugador que ha sacado ese número
 function sinFichasDisponibles(numero){
     let ficGanad = "fichasGanadas" + pActual.turnoDe;
-    //Pinta la casilla a 0 en cada número, excepto en 12 que las suma todas y las pinta todas a 0
+    //Establece la casilla a 0 en cada número, excepto en 12 que las suma todas y las asigna todas a 0
     if (numero === 12){ //En este caso gana todas las fichas
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
@@ -203,7 +202,7 @@ function terminarPartida(){
     let contador = 0;
     let ganadorF = 0;
     let ganador = "";
-    let resultadoRecords = [];
+    // let resultadoRecords = [];
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
         if(pActual.jugadores[i]["ganadas"] > ganadorF){
@@ -249,8 +248,8 @@ function mostrarRecords(resultadoRecords){
 
 //Si quedan fichas disponibles en los jugadores usa el número del dado para colocar la ficha en su sitio y resta una al jugador que le toque
 function conFichasDisponibles(numero) {
-    let ficInit = "fichasInicio" + pActual.turnoDe;
-    let ficGanad = "fichasGanadas" + pActual.turnoDe;
+    // let ficInit = "fichasInicio" + pActual.turnoDe;
+    // let ficGanad = "fichasGanadas" + pActual.turnoDe;
     let fichasActuales = 0;
     
     //Se asigna el número de fichas a su casilla
@@ -260,13 +259,13 @@ function conFichasDisponibles(numero) {
 
     fichasActuales = pActual.casillas[numero];
 
-    for (let i = 0; i < pActual.jugadores.length; i++) { //Se actualizan los datos de las fichas del jugador actual
-        if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
-            if(numero !== 12){
-                let fichas = pActual.jugadores[i]["fichas"] -= 1;
-            }
-        }
-    }
+    // for (let i = 0; i < pActual.jugadores.length; i++) { //Se actualizan los datos de las fichas del jugador actual
+    //     if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
+    //         if(numero !== 12){
+    //             let fichas = pActual.jugadores[i]["fichas"] -= 1;
+    //         }
+    //     }
+    // }
 
     //Se asigna el nuevo estado de la casilla que ha salido
     if (numero === 7) {
