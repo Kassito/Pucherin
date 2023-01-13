@@ -1,7 +1,7 @@
 const refresh = document.getElementById('refresh');
 const images = ["imagenes/dado1.jpg", "imagenes/dado2.jpg", "imagenes/dado3.jpg", "imagenes/dado4.jpg", "imagenes/dado5.jpg", "imagenes/dado6.jpg"];
 
-const fichasTotales = 12;
+const fichasTotales = 60;
 
 var finPartida = false;
 
@@ -32,7 +32,6 @@ var pActual;
 //Al iniciar la partida reparte las fichas en función de los jugadores
 function repartir(jugadores){
     //Se pregunta el número de jugadores, se crea una nueva partida y se asignan las fichas
-
     pActual = new Partida();
 
     console.log(pActual);
@@ -103,16 +102,18 @@ function turnoActual(){
 function comprobarFichas(){
     let count = pActual.jugadores.length;
     let total = 0;
-     let fichas = 0;
+    let fichas = 0;
     for (let i = 0; i < pActual.jugadores.length; i++) {
         total += pActual.jugadores[i]["ganadas"];
-        fichas += pActual.jugadores[i]["fichas"];
+        // fichas += pActual.jugadores[i]["fichas"];
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
-            let fichas = pActual.jugadores[i]["fichas"];
-            if(fichas === 0){
-                count = 0;
-            }
-        }
+            fichas = pActual.jugadores[i]["fichas"];
+            console.log(fichas+" Fichas fuera")
+
+            // if(fichas === 0){
+            //     count = 0;
+            // }
+         }
     }
 
     if((!finPartida) && total === fichasTotales){ //Si ya no hay fichas y la partida se ha terminado mira quién ha ganado
@@ -121,9 +122,11 @@ function comprobarFichas(){
     }else {
         let numero = tiradaDados();
 
-        if (count === 0) { //Si ya no quedan fichas por jugar, pero si en el tablero comienza a asignar las fichas en cada jugada
+        if (fichas === 0) { //Si ya no quedan fichas por jugar, pero si en el tablero comienza a asignar las fichas en cada jugada
+            console.log("entrando sinfichas")
             sinFichasDisponibles(numero);
         } else{ //Si quedan fichas por jugar, sigue jugando normal
+            console.log("entrando confichas")
             conFichasDisponibles(numero);
         }
 
@@ -265,17 +268,24 @@ function conFichasDisponibles(numero) {
 
     //Se pinta el nuevo estado de la casilla que ha salido
     if (numero < 7) {
+        console.log("Numero menor a 7")
         pintarCasilla(canvases[numero - 2], numero, fichasActuales);
     } else if (numero > 7 && numero < 12) {
+        console.log("Numero mayor a 7")
+
         pintarCasilla(canvases[numero - 3], numero, fichasActuales);
     } else if (numero === 7) {
+        console.log("Numero 7")
+
         fichasActuales += 1;
+        // pActual.casillas[7]+=1;
     } else if (numero === 12) {
+        console.log("Numero menor a 12");
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
-                let fichas = pActual.jugadores[i]["ganadas"] += pActual.casillas[7];
-                console.log(pActual.jugadores[i]["Nombre"] + " gana " + fichas + " fichas");
-                document.getElementById(ficGanad).innerHTML = fichas;
+                let fichasGanadas = pActual.jugadores[i]["ganadas"] += pActual.casillas[7];
+                console.log(pActual.jugadores[i]["Nombre"] + " gana " + fichasGanadas + " fichas");
+                document.getElementById(ficGanad).innerHTML = fichasGanadas;
             }
         }
         pActual.casillas[7] = 0;
@@ -315,15 +325,18 @@ function girarDado(dieOneValue, dieTwoValue){
 //Comprueba el número que ha salido y pinta la casilla de nuevo vacía sumando su número al jugador que le toca
 function comprobarLleno(numero, fichasActuales){
     let ficGanad = "fichasGanadas" + pActual.turnoDe;
-    let f = 0;
+    // let f = 0;
     console.log(fichasActuales +" y numero "+ numero)
 
-    if(fichasActuales === numero){
+    if(fichasActuales === numero && numero !==7){
         if(numero < 7){
+            console.log("MEnos que 7")
             pintarCasilla(canvases[numero -2], numero, 0);
         } else if(numero > 7 && numero < 12){
+            console.log("MAs que 7")
+
             pintarCasilla(canvases[numero -3], numero, 0);
-        } 
+        }
 
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
