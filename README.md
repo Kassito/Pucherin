@@ -44,3 +44,16 @@ Juego original fabricado por Juguetes Borrás y llevado a la edición digital po
 - En el objeto partida hay un array de jugadores que almacena los objetos jugadores. Se crea al iniciar la partida.
 - En el objeto partida hay un array que almacena los datos de las casillas.
 - Para jugar en modo texto debe ejecutarse modoTexto.js en nodejs. Al finalizar la partida se termina y debe llamarse de nuevo. Se ha intentado reiniciar la partida si se quiere jugar de nuevo, pero la forma de preguntar por pantalla con escuchadores no funciona de la forma deseada. Se investigará para futuro.
+
+
+## Criterios de calificación:
+   - CÓDIGO JAVASCRIPT. El código está correctamente indexado, comentado y nombrado según las buenas prácticas.
+   - VALIDACIÓN DEL CÓDIGO. El juego no presenta ningún error de compilación
+   - ELEMENTOS DEL JUEGO. Se puede elegir el número de jugadores, iniciar una partida nueva al acabar otra y saber la información actual de cada jugador.
+   - JUEGO EN MODO TEXTO. Permite jugar en modo texto sin ningún problema y con las adaptaciones oportunas.
+   - JUEGO EN MODO GRÁFICO. El modo gráfico no presenta errores y muestra la información de manera correcta.
+   - OBJETOS. Herencia no hemos utilizado, pero objetos con constructores si, además de manera continua hacemos uso de los mismos.
+   - ARREGLOS. El código se apoya en gran medida del uso de arrays para guardar diferentes datos y poder acceder a ellos de manera sencilla 
+   - TEST UNITARIOS. Hay varios test unitarios para probar funcionalidades como el reparto de fichas iniciales a los jugadores o que la suma de los dados siempre sea entre el dos y el doce.
+   - CARACTERÍSTICAS EXTRAS 1. Al modificar el tamaño y tan solo recargando la página la visualización del juego se adapta al tamaño.
+   - CARACTERÍSTICAS EXTRAS 2. La animación de los dados le da cierta atracción al juego. Y en un futuro la idea era añadir el sonido de unos dados girando.

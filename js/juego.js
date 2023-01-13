@@ -213,7 +213,7 @@ function terminarPartida(){
         console.log("Empate");
         document.getElementById("ganador").innerHTML = "Empate";
     } else{ //Si no muestra el ganador y lo añade al ranking
-        ganador = prompt("Cuál es tu nombre?"); //Pregunta el nombre del ganador para ponerlo por pantalla
+        ganador = prompt("¿Cuál es tu nombre?"); //Pregunta el nombre del ganador para ponerlo por pantalla
         console.log("El ganador es " + ganador);
         document.getElementById("ganador").innerHTML = "El ganador es " + ganador;
         records.push(ganador + " con " + ganadorF + " fichas"); 
