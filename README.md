@@ -36,3 +36,11 @@ Pucherín es un juego de mesa, ahora implementado en digital gracias a los desar
 [Jugar ahora](https://kassito.github.io/Pucherin/)
 
 Juego original fabricado por Juguetes Borrás y llevado a la edición digital por Infanta´s Developers.
+
+
+# Características:
+- Para jugar en diferentes tamaños de pantalla se debe recargar la página una vez seleccionado el nuevo tamaño, de esta forma se ajustará el tablero al mismo.
+- La partida se crea como un objeto en cuyo interior están los datos de la partida.
+- En el objeto partida hay un array de jugadores que almacena los objetos jugadores. Se crea al iniciar la partida.
+- En el objeto partida hay un array que almacena los datos de las casillas.
+- Para jugar en modo texto debe ejecutarse modoTexto.js en nodejs. Al finalizar la partida se termina y debe llamarse de nuevo. Se ha intentado reiniciar la partida si se quiere jugar de nuevo, pero la forma de preguntar por pantalla con escuchadores no funciona de la forma deseada. Se investigará para futuro.
