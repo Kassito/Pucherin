@@ -122,14 +122,14 @@ function comprobarFichas(){
 
     for (let i = 0; i < pActual.jugadores.length; i++) {
         total += pActual.jugadores[i]["ganadas"];
-        fichas += pActual.jugadores[i]["fichas"];
+        // fichas += pActual.jugadores[i]["fichas"];
         console.log(pActual.jugadores[i]["Nombre"] + " tiene " + pActual.jugadores[i]["fichas"] + " y ganadas " + pActual.jugadores[i]["ganadas"]);
 
         if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
-            let fichas = pActual.jugadores[i]["fichas"];
-            if(fichas === 0){
-                count = 0;
-            }
+            fichas = pActual.jugadores[i]["fichas"];
+            // if(fichas === 0){
+            //     count = 0;
+            // }
         }
     }
 
@@ -139,7 +139,7 @@ function comprobarFichas(){
     }else {
         let numero = tiradaDados();
 
-        if (count === 0) { //Si ya no quedan fichas por jugar, pero si en el tablero comienza a asignar las fichas en cada jugada
+        if (fichas === 0) { //Si ya no quedan fichas por jugar, pero si en el tablero comienza a asignar las fichas en cada jugada
             sinFichasDisponibles(numero);
         } else{ //Si quedan fichas por jugar, sigue jugando normal
             conFichasDisponibles(numero);
@@ -153,7 +153,7 @@ function comprobarFichas(){
 
 //Cuando no quedan fichas para jugar asigna las que tenga cada casilla al jugador que ha sacado ese número
 function sinFichasDisponibles(numero){
-    let ficGanad = "fichasGanadas" + pActual.turnoDe;
+    // let ficGanad = "fichasGanadas" + pActual.turnoDe;
     //Establece la casilla a 0 en cada número, excepto en 12 que las suma todas y las asigna todas a 0
     if (numero === 12){ //En este caso gana todas las fichas
         for (let i = 0; i < pActual.jugadores.length; i++) {
@@ -259,13 +259,13 @@ function conFichasDisponibles(numero) {
 
     fichasActuales = pActual.casillas[numero];
 
-    // for (let i = 0; i < pActual.jugadores.length; i++) { //Se actualizan los datos de las fichas del jugador actual
-    //     if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
-    //         if(numero !== 12){
-    //             let fichas = pActual.jugadores[i]["fichas"] -= 1;
-    //         }
-    //     }
-    // }
+    for (let i = 0; i < pActual.jugadores.length; i++) { //Se actualizan los datos de las fichas del jugador actual
+        if (pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe) {
+            if(numero !== 12){
+                let fichas = pActual.jugadores[i]["fichas"] -= 1;
+            }
+        }
+    }
 
     //Se asigna el nuevo estado de la casilla que ha salido
     if (numero === 7) {
@@ -295,10 +295,10 @@ function tiradaDados() {
 
 //Comprueba el número que ha salido y pinta la casilla de nuevo vacía sumando su número al jugador que le toca
 function comprobarLleno(numero, fichasActuales){
-    let ficGanad = "fichasGanadas" + pActual.turnoDe;
-    let f = 0;
+    // let ficGanad = "fichasGanadas" + pActual.turnoDe;
+    // let f = 0;
 
-    if(fichasActuales === numero){
+    if(fichasActuales === numero && numero !== 7){
         for (let i = 0; i < pActual.jugadores.length; i++) {
             if(pActual.jugadores[i]["Nombre"] === "Jugador" + pActual.turnoDe){
                 let fichas = pActual.jugadores[i]["ganadas"] += numero;
