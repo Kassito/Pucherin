@@ -27,6 +27,38 @@ function Partida() {
     }
 }
 
+//A futurno se usarán objetos con métodos que harán el código más limpio
+// class Jugador{
+//     constructor(nombre, fichas, ganadas) {
+//     this.nombre = nombre;
+//     this.fichas = fichas;
+//     this.ganadas = ganadas;
+//     };
+//     get fichasDisponibles() {
+//         return this.ficahs;
+//     };
+//     set fichasDisponibles(restar) {
+//         this.fichas -= restar;
+//     }
+//     get ganadas() {
+//         return this.ganadas;
+//     };
+//     set ganadas(numero) {
+//         this.ganadas += numero;
+//     }
+// }
+
+// Jugador.prototype = {
+//     constructor: Jugador,
+    
+//     restarFicha: function() {
+//       return this.fichas-=1;
+//     },
+//     sumarGanadas: function(numero) {
+//       return this.ganadas += numero; 
+//     }
+//   };
+
 var pActual;
 
 //Al iniciar la partida reparte las fichas en función de los jugadores
